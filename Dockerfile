@@ -13,4 +13,5 @@ RUN n 10.16.0
 COPY . /home/server
 WORKDIR /home/server
 RUN npm install
+EXPOSE 3000
 CMD ["npm", "start"]

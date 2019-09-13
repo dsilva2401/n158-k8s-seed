@@ -11,6 +11,11 @@ build:
 start:
 	@docker run -p 3000:3000 -t ${IMAGE_NAME}
 
-publish:
+publish-image:
 	@docker tag ${IMAGE_NAME} ${strip $(ACCOUNT_NAME)}/${strip $(IMAGE_NAME)}:${CURRENT_VERSION}
 	@docker push ${strip $(ACCOUNT_NAME)}/${strip $(IMAGE_NAME)}:${CURRENT_VERSION}
+
+deploy-image:
+	@kubectl --kubeconfig="connection-config.yaml" apply -f k8s-manifest.yaml
+
+deploy: publish-image deploy-image

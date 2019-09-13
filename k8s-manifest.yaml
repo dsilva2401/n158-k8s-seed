@@ -1,0 +1,33 @@
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: server
+spec:
+  type: LoadBalancer
+  selector:
+    app: server
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 3000
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: dsilva2401/n158-sample:v1.0.0 # Replace image with yours
+        ports:
+        - containerPort: 3000
+          protocol: TCP

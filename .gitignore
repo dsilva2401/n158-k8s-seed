@@ -60,4 +60,8 @@ typings/
 # next.js build output
 .next
 
+# MacOS
 .DS_Store
+
+# K8s connection data
+connection-config.yaml
